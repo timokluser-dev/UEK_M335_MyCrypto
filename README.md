@@ -1,6 +1,6 @@
 # MyCrypto
 
-Foobar is a Python library for dealing with word pluralization.
+MyCrypto helps you to manage your crypto holdings on your phone 💸
 
 ## Installation
 
@@ -13,7 +13,7 @@ npm install
 ## Usage
 
 ```bash
-npm start
+npm run --list
 ```
 
 ## Contributing
