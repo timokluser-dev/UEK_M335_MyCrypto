@@ -1,0 +1,6 @@
+{
+	"appId": "com.timokluser.mycrypto",
+	"appName": "MyCrypto",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}

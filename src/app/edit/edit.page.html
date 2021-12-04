@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/ui/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ (isNewRecord) ? "New Holding" : "Edit " + holding?.symbol }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [scrollY]="false">
+  <div class="edit__container">
+    <div class="edit__form">
+      <ion-item>
+        <ion-label position="stacked">Currency Symbol</ion-label>
+        <ion-input
+          [(ngModel)]="model.symbol"
+          type="text"
+          required="true"
+          placeholder="BTC"
+        ></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Amount</ion-label>
+        <ion-input
+          [(ngModel)]="model.amount"
+          type="number"
+          required="true"
+          placeholder="1.0"
+        ></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Exchange</ion-label>
+        <ion-input
+          [(ngModel)]="model.exchange"
+          type="text"
+          required="true"
+          placeholder="Binance"
+        ></ion-input>
+      </ion-item>
+    </div>
+  </div>
+
+  <div class="edit__submit mt-4">
+    <ion-button expand="block" (click)="save()">Save</ion-button>
+  </div>
+</ion-content>

@@ -1,17 +1,25 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Tab 1
-    </ion-title>
+    <ion-title>My Holdings</ion-title>
+    <ion-buttons slot="end" *ngIf="!platformHeaderIsSupported">
+      <ion-button [routerLink]="['/ui/new']" color="primary">
+        <ion-icon name="add"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content class="home__container" [fullscreen]="true" [scrollY]="false">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
+      <ion-title size="large">My Holdings</ion-title>
+      <ion-buttons slot="end">
+        <ion-button [routerLink]="['/ui/new']">
+          <ion-icon name="add"></ion-icon>
+        </ion-button>
+      </ion-buttons>
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+  <app-home></app-home>
 </ion-content>
