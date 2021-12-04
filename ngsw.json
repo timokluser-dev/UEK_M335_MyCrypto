@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1638619387608,
+  "timestamp": 1638619567501,
   "index": "https://timokluser-dev.github.io/UEK_M335_MyCrypto/index.html",
   "assetGroups": [
     {
@@ -177,7 +177,7 @@
     "https://timokluser-dev.github.io/UEK_M335_MyCrypto/common.474549d7b2d2aa805efc.js": "012bdafc657d38437ea3a8e4f5fe50dec40a10e1",
     "https://timokluser-dev.github.io/UEK_M335_MyCrypto/index.html": "37700465cd8e00f34f594125c06e9402b4c45419",
     "https://timokluser-dev.github.io/UEK_M335_MyCrypto/main.79af99ee4148e0c12bac.js": "b9784ef5bfb68b90246a1838cc69156af00ca4da",
-    "https://timokluser-dev.github.io/UEK_M335_MyCrypto/manifest.webmanifest": "18d0da2a4c85797c2989b31467a99bc3a5e49179",
+    "https://timokluser-dev.github.io/UEK_M335_MyCrypto/manifest.webmanifest": "9660333ffeff33391e528448345965d2b5cee4b0",
     "https://timokluser-dev.github.io/UEK_M335_MyCrypto/polyfills-core-js.1072cf89e83b0891c8a5.js": "0230301234d50af9ee078ed198cfe78f2c963581",
     "https://timokluser-dev.github.io/UEK_M335_MyCrypto/polyfills-css-shim.277755a08d22562385cd.js": "9b7a6908c37bc64ce445ce0b93bb86cfac181704",
     "https://timokluser-dev.github.io/UEK_M335_MyCrypto/polyfills-dom.2c4e77ac920e6bd841d8.js": "d85d6d21a5c672054aa95acee78d72258c593ea4",
