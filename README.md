@@ -2,6 +2,10 @@
 
 MyCrypto helps you to manage your crypto holdings on your phone 💸
 
+<a href="https://timokluser-dev.github.io/UEK_M335_MyCrypto/" target="_blank">
+  <img src="resources/icon.png" style="width: 128px; height: 128px" />
+</a>
+
 ## Installation
 
 Use [npm](https://www.npmjs.com/) to install dependencies.
