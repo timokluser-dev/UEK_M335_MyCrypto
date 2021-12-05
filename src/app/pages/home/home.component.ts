@@ -1,29 +1,31 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Holding} from '../../models/Holding';
 import * as numeral from 'numeral';
 import {HoldingsService} from '../../services/holdings/holdings.service';
+import {IsOnlineService} from '../../services/is-online/is-online.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
   public searchTerm: string = '';
 
-  constructor(private holdingsService: HoldingsService) {
-    // TODO fix
-    this.searchTerm = '';
+  constructor(private holdingsService: HoldingsService, private isOnlineService: IsOnlineService) {}
+
+  ngOnInit() {
     setTimeout(() => {
-      // this.searchTerm = ' ';
-      // this.searchTerm = '';
       this.refreshHoldings(null);
-    }, 1000);
+    }, 1500);
   }
 
-  ngOnInit() {}
+  ngOnDestroy() {
+    this.holdingsService = null;
+  }
 
   get holdings(): Holding[] {
+    console.log('access holdings get', this.holdingsService.holdings.length);
     return this.holdingsService.holdings.filter(
       value =>
         value.symbol.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
@@ -48,6 +50,6 @@ export class HomeComponent implements OnInit {
   }
 
   public getHoldingImage(holding: Holding): string {
-    return 'https://s2.coinmarketcap.com/static/img/coins/64x64/1.png';
+    return 'assets/cryptos/fallback.png';
   }
 }
