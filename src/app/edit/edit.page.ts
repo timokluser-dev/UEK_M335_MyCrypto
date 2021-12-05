@@ -1,21 +1,23 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {HoldingsService} from '../services/holdings/holdings.service';
 import {Holding} from '../models/Holding';
+import {Browser} from '@capacitor/browser';
 
 @Component({
   selector: 'app-edit',
   templateUrl: './edit.page.html',
   styleUrls: ['./edit.page.scss'],
 })
-export class EditPage implements OnInit {
+export class EditPage implements OnInit, OnDestroy {
   public key: string | null;
   public holding: Holding | null;
+  public doValidate: boolean = false;
 
   public model: Holding = {
     _key: null,
     symbol: '',
-    amount: 0,
+    amount: null,
     exchange: '',
     owner: null,
   };
@@ -36,18 +38,82 @@ export class EditPage implements OnInit {
 
   ngOnInit() {}
 
+  ngOnDestroy() {
+    this.holdingsService = null;
+  }
+
+  /**
+   * validation errors for every field
+   */
+  public get errors(): any {
+    return {
+      symbol: this.doValidate && this.model.symbol.trim().length == 0,
+      amount: this.doValidate && (this.model.amount < 0 || this.model.amount == null),
+      exchange: this.doValidate && this.model.exchange.trim().length == 0,
+    };
+  }
+
   public get isNewRecord(): boolean {
     return this.key === null;
   }
 
+  public get isEmptySymbol(): boolean {
+    return this.model.symbol.length == 0;
+  }
+
+  public onChangeSymbol(): void {
+    this.model.symbol = this.model.symbol.toUpperCase().replace(' ', '');
+  }
+
+  public onChangeAmount(): void {
+    this.model.amount = this.model.amount < 0 ? 0 : this.model.amount;
+  }
+
+  private isValid(): boolean {
+    for (const key in this.errors) {
+      if (this.errors[key]) return false;
+    }
+    return true;
+  }
+
   public save(): void {
-    // TODO make validation
-    if (this.key) {
-      this.holdingsService.update(this.key, this.model);
-    } else {
+    this.doValidate = true;
+    if (!this.isValid()) return;
+
+    if (this.isNewRecord) {
       this.holdingsService.create(this.model);
+    } else {
+      this.holdingsService.update(this.key, this.model);
     }
 
     this.router.navigate(['/ui/home']);
   }
+
+  //#region Exchanges Linking
+
+  public openBinance(): void {
+    this.isNewRecord && (this.model.exchange = 'Binance');
+    this.openBrowser(`https://www.binance.com/en/trade/${this.model.symbol}_USDT`);
+  }
+
+  public openFtx(): void {
+    this.isNewRecord && (this.model.exchange = 'FTX');
+    this.openBrowser(`https://ftx.com/trade/${this.model.symbol}/USDT`);
+  }
+
+  public openCoinbase(): void {
+    this.isNewRecord && (this.model.exchange = 'Coinbase');
+    this.openBrowser(`https://pro.coinbase.com/trade/${this.model.symbol}-USDT`);
+  }
+
+  public openBitpanda(): void {
+    this.isNewRecord && (this.model.exchange = 'Bitpanda');
+    this.openBrowser(`https://exchange.bitpanda.com/${this.model.symbol}_USDT`);
+  }
+
+  private openBrowser(url: string): void {
+    Browser.open({url: url});
+  }
+
+  //#endregion Exchanges Linking
 }

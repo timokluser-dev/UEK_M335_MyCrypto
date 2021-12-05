@@ -1,8 +1,16 @@
 .edit__container {
-  h1,
-  p {
+  h1, h2, h3, p {
     padding-inline-start: 12px;
     padding-inline-end: 12px;
+  }
+}
+
+.buy__container {
+  margin-top: 2.5rem;
+
+  ion-chip {
+    margin-inline-start: 12px;
+    margin-inline-end: 12px;
   }
 }
 

@@ -14,7 +14,12 @@
         <ion-label position="stacked">Currency Symbol</ion-label>
         <ion-input
           [(ngModel)]="model.symbol"
+          (ionChange)="onChangeSymbol()"
+          (change)="onChangeSymbol()"
+          [color]="(errors.symbol) ? 'danger' : ''"
+          name="symbol"
           type="text"
+          inputmode="text"
           required="true"
           placeholder="BTC"
         ></ion-input>
@@ -24,8 +29,15 @@
         <ion-label position="stacked">Amount</ion-label>
         <ion-input
           [(ngModel)]="model.amount"
+          (ionChange)="onChangeAmount()"
+          (change)="onChangeAmount()"
+          [color]="(errors.amount) ? 'danger' : ''"
+          name="amount"
           type="number"
+          inputmode="decimal"
           required="true"
+          min="0"
+          step="0.5"
           placeholder="1.0"
         ></ion-input>
       </ion-item>
@@ -34,11 +46,44 @@
         <ion-label position="stacked">Exchange</ion-label>
         <ion-input
           [(ngModel)]="model.exchange"
+          [color]="(errors.exchange) ? 'danger' : ''"
+          name="exchange"
           type="text"
+          inputmode="text"
           required="true"
           placeholder="Binance"
         ></ion-input>
       </ion-item>
+    </div>
+
+    <div class="buy__container">
+      <h2 class="buy__label">Buy:</h2>
+
+      <ion-chip (click)="openBinance()" [disabled]="isEmptySymbol"
+                [color]="(model?.exchange.toLowerCase() == 'binance') ? 'primary' : ''">
+        <ion-icon name="cart"></ion-icon>
+        <ion-label>Binance</ion-label>
+      </ion-chip>
+
+      <ion-chip (click)="openFtx()" [disabled]="isEmptySymbol"
+                [color]="(model?.exchange.toLowerCase() == 'ftx') ? 'primary' : ''">
+        <ion-icon name="cart"></ion-icon>
+        <ion-label>FTX</ion-label>
+      </ion-chip>
+
+      <ion-chip (click)="openCoinbase()" [disabled]="isEmptySymbol"
+                [color]="(model?.exchange.toLowerCase() == 'coinbase') ? 'primary' : ''">
+        <ion-icon name="cart"></ion-icon>
+        <ion-label>Coinbase</ion-label>
+      </ion-chip>
+
+      <ion-chip (click)="openBitpanda()" [disabled]="isEmptySymbol"
+                [color]="(model?.exchange.toLowerCase() == 'bitpanda') ? 'primary' : ''">
+        <ion-icon name="cart"></ion-icon>
+        <ion-label>Bitpanda</ion-label>
+      </ion-chip>
+
+      <p *ngIf="isEmptySymbol">Please enter the symbol to unlock the buy option</p>
     </div>
   </div>
 
