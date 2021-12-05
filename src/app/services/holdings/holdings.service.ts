@@ -1,8 +1,11 @@
-import {Injectable} from '@angular/core';
+import {Injectable, OnDestroy} from '@angular/core';
 import {environment} from '../../../environments/environment';
 import {Holding} from '../../models/Holding';
+import {DeviceAuthService} from '../device-auth/device-auth.service';
 
-import {FirebaseApp, initializeApp} from 'firebase/app';
+//#region Firebase imports
+
+import {initializeApp, FirebaseApp} from 'firebase/app';
 import {
   getDatabase,
   ref,
@@ -16,35 +19,50 @@ import {
   get,
   orderByChild,
   child,
+  Database,
+  DatabaseReference,
+  DataSnapshot,
+  Unsubscribe,
+  Query,
 } from 'firebase/database';
-import {Database, DatabaseReference, DataSnapshot, Unsubscribe} from 'firebase/database';
-import {DeviceAuthService} from '../device-auth/device-auth.service';
+import {getAuth, signInAnonymously, Auth, UserCredential} from 'firebase/auth';
+
+//#endregion Firebase imports
 
 const HOLDINGS_DB: string = 'holdings';
 
 @Injectable({
   providedIn: 'root',
 })
-export class HoldingsService {
+export class HoldingsService implements OnDestroy {
   private _holdings: Holding[];
   private owner: string;
 
   private readonly firebaseApp: FirebaseApp;
-  private readonly database: Database;
-  private readonly refHoldings: DatabaseReference;
+  private readonly auth: Auth;
+  private user: UserCredential;
+  private database: Database;
+  private refHoldings: DatabaseReference;
+  private refMyHoldings: Query;
   // unsubscriber of get data event
   private unsubscriber: Unsubscribe;
 
   constructor(private deviceAuthService: DeviceAuthService) {
     this._holdings = [];
     this.firebaseApp = initializeApp(environment.firebase);
-    this.database = getDatabase(this.firebaseApp);
-    this.refHoldings = ref(this.database, `${HOLDINGS_DB}/`);
+    this.auth = getAuth(this.firebaseApp);
 
-    this.deviceAuthService.getDeviceId().then(value => {
-      this.owner = value;
-      // register listening
-      this.get();
+    signInAnonymously(this.auth).then(user => {
+      this.user = user;
+      this.database = getDatabase(this.firebaseApp);
+      this.refHoldings = ref(this.database, `${HOLDINGS_DB}/`);
+
+      this.deviceAuthService.getDeviceId().then(value => {
+        this.owner = value;
+        this.refMyHoldings = query(this.refHoldings, orderByChild('owner'), equalTo(this.owner));
+        // register listening
+        this.get();
+      });
     });
   }
 
@@ -67,10 +85,10 @@ export class HoldingsService {
    * @private
    */
   private get(): void {
-    const refMyHoldings = query(this.refHoldings, orderByChild('owner'), equalTo(this.owner));
-    this.unsubscriber = onValue(refMyHoldings, dataSnapshot => {
+    this.unsubscriber = onValue(this.refMyHoldings, dataSnapshot => {
       this._holdings = this.orderBySymbol(this.convertDataSnapshotToArray(dataSnapshot));
-      console.table(this._holdings);
+      this._holdings.length > 0 && !environment.production && console.table(this._holdings);
+      console.log('save data');
     });
   }
 
