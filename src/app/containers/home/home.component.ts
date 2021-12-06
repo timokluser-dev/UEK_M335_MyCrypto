@@ -1,31 +1,23 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Holding} from '../../models/Holding';
 import * as numeral from 'numeral';
 import {HoldingsService} from '../../services/holdings/holdings.service';
-import {IsOnlineService} from '../../services/is-online/is-online.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent implements OnInit, OnDestroy {
+export class HomeComponent implements OnInit {
   public searchTerm: string = '';
 
-  constructor(private holdingsService: HoldingsService, private isOnlineService: IsOnlineService) {}
+  constructor(private holdingsService: HoldingsService) {}
 
   ngOnInit() {
-    setTimeout(() => {
-      this.refreshHoldings(null);
-    }, 1500);
+    this.holdingsService.cleanRefresh();
   }
 
-  ngOnDestroy() {
-    this.holdingsService = null;
-  }
-
-  get holdings(): Holding[] {
-    console.log('access holdings get', this.holdingsService.holdings.length);
+  public get holdings(): Holding[] {
     return this.holdingsService.holdings.filter(
       value =>
         value.symbol.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
@@ -36,9 +28,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   public refreshHoldings($event): void {
-    this.holdingsService.refresh();
-    // confirm refresh
-    $event?.target.complete();
+    this.holdingsService.refresh($event);
   }
 
   public deleteHolding(holding: Holding): void {

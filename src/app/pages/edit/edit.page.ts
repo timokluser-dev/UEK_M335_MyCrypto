@@ -1,7 +1,7 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {HoldingsService} from '../services/holdings/holdings.service';
-import {Holding} from '../models/Holding';
+import {HoldingsService} from '../../services/holdings/holdings.service';
+import {Holding} from '../../models/Holding';
 import {Browser} from '@capacitor/browser';
 
 @Component({
@@ -9,7 +9,7 @@ import {Browser} from '@capacitor/browser';
   templateUrl: './edit.page.html',
   styleUrls: ['./edit.page.scss'],
 })
-export class EditPage implements OnInit, OnDestroy {
+export class EditPage implements OnInit {
   public key: string | null;
   public holding: Holding | null;
   public doValidate: boolean = false;
@@ -32,20 +32,19 @@ export class EditPage implements OnInit, OnDestroy {
     !this.isNewRecord &&
       this.holdingsService
         .getByKey(this.key)
-        .then(value => (this.holding = value))
-        .then(() => (this.model = this.holding));
+        .then(value => {
+          this.holding = value;
+          this.model = this.holding;
+        })
+        .catch(e => this.router.navigate(['/ui/home']));
   }
 
   ngOnInit() {}
 
-  ngOnDestroy() {
-    this.holdingsService = null;
-  }
-
   /**
    * validation errors for every field
    */
-  public get errors(): any {
+  public get errors(): FormError {
     return {
       symbol: this.doValidate && this.model.symbol.trim().length == 0,
       amount: this.doValidate && (this.model.amount < 0 || this.model.amount == null),
@@ -116,4 +115,10 @@ export class EditPage implements OnInit, OnDestroy {
   }
 
   //#endregion Exchanges Linking
+}
+
+interface FormError {
+  symbol: boolean;
+  amount: boolean;
+  exchange: boolean;
 }

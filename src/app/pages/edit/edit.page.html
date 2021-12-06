@@ -56,29 +56,41 @@
       </ion-item>
     </div>
 
-    <div class="buy__container">
+    <div class="buy__container" *ngIf="isNewRecord">
       <h2 class="buy__label">Buy:</h2>
 
-      <ion-chip (click)="openBinance()" [disabled]="isEmptySymbol"
-                [color]="(model?.exchange.toLowerCase() == 'binance') ? 'primary' : ''">
+      <ion-chip
+        (click)="openBinance()"
+        [disabled]="isEmptySymbol"
+        [color]="(model?.exchange.toLowerCase() == 'binance') ? 'primary' : ''"
+      >
         <ion-icon name="cart"></ion-icon>
         <ion-label>Binance</ion-label>
       </ion-chip>
 
-      <ion-chip (click)="openFtx()" [disabled]="isEmptySymbol"
-                [color]="(model?.exchange.toLowerCase() == 'ftx') ? 'primary' : ''">
+      <ion-chip
+        (click)="openFtx()"
+        [disabled]="isEmptySymbol"
+        [color]="(model?.exchange.toLowerCase() == 'ftx') ? 'primary' : ''"
+      >
         <ion-icon name="cart"></ion-icon>
         <ion-label>FTX</ion-label>
       </ion-chip>
 
-      <ion-chip (click)="openCoinbase()" [disabled]="isEmptySymbol"
-                [color]="(model?.exchange.toLowerCase() == 'coinbase') ? 'primary' : ''">
+      <ion-chip
+        (click)="openCoinbase()"
+        [disabled]="isEmptySymbol"
+        [color]="(model?.exchange.toLowerCase() == 'coinbase') ? 'primary' : ''"
+      >
         <ion-icon name="cart"></ion-icon>
         <ion-label>Coinbase</ion-label>
       </ion-chip>
 
-      <ion-chip (click)="openBitpanda()" [disabled]="isEmptySymbol"
-                [color]="(model?.exchange.toLowerCase() == 'bitpanda') ? 'primary' : ''">
+      <ion-chip
+        (click)="openBitpanda()"
+        [disabled]="isEmptySymbol"
+        [color]="(model?.exchange.toLowerCase() == 'bitpanda') ? 'primary' : ''"
+      >
         <ion-icon name="cart"></ion-icon>
         <ion-label>Bitpanda</ion-label>
       </ion-chip>

@@ -26,6 +26,8 @@ import {
   Query,
 } from 'firebase/database';
 import {getAuth, signInAnonymously, Auth, UserCredential} from 'firebase/auth';
+import {Router} from '@angular/router';
+import {IsOnlineService} from '../is-online/is-online.service';
 
 //#endregion Firebase imports
 
@@ -38,8 +40,8 @@ export class HoldingsService implements OnDestroy {
   private _holdings: Holding[];
   private owner: string;
 
-  private readonly firebaseApp: FirebaseApp;
-  private readonly auth: Auth;
+  private firebaseApp: FirebaseApp;
+  private auth: Auth;
   private user: UserCredential;
   private database: Database;
   private refHoldings: DatabaseReference;
@@ -47,7 +49,11 @@ export class HoldingsService implements OnDestroy {
   // unsubscriber of get data event
   private unsubscriber: Unsubscribe;
 
-  constructor(private deviceAuthService: DeviceAuthService) {
+  constructor(
+    private deviceAuthService: DeviceAuthService,
+    private isOnlineService: IsOnlineService,
+    private router: Router
+  ) {
     this._holdings = [];
     this.firebaseApp = initializeApp(environment.firebase);
     this.auth = getAuth(this.firebaseApp);
@@ -80,30 +86,35 @@ export class HoldingsService implements OnDestroy {
   //#region CRUD
 
   /**
-   * initial fetch data &
-   * register data event listener
+   * initial fetch data & register data event listener
    * @private
    */
   private get(): void {
     this.unsubscriber = onValue(this.refMyHoldings, dataSnapshot => {
       this._holdings = this.orderBySymbol(this.convertDataSnapshotToArray(dataSnapshot));
       this._holdings.length > 0 && !environment.production && console.table(this._holdings);
-      console.log('save data');
     });
   }
 
-  public refresh(): void {
+  public refresh($event = null): void {
     typeof this.unsubscriber === 'function' && this.unsubscriber();
     this.get();
+    $event?.target?.complete();
   }
 
   public getByKey(key: string): Promise<Holding> {
-    const refDatabase = ref(this.database);
-    return get(child(refDatabase, `${HOLDINGS_DB}/${key}`)).then(dataSnapshot => {
-      let element = dataSnapshot.val() as Holding;
-      // manual remapping of key
-      element._key = key;
-      return element;
+    // const refDatabase = ref(this.database);
+    // return get(child(refDatabase, `${HOLDINGS_DB}/${key}`)).then(dataSnapshot => {
+    //   let element = dataSnapshot.val() as Holding;
+    //   // manual remapping of key
+    //   element._key = key;
+    //   return element;
+    // });
+
+    return new Promise<Holding>((resolve, reject) => {
+      const holding = this._holdings.filter(holding => holding._key === key)[0];
+      !holding && reject(new Error('no holding with key found'));
+      resolve(this._holdings.filter(holding => holding._key === key)[0]);
     });
   }
 
@@ -124,9 +135,9 @@ export class HoldingsService implements OnDestroy {
     });
   }
 
-  public delete(id: string): void {
+  public delete(key: string): void {
     // path to deleting item
-    const refDeleteHolding = ref(this.database, `${HOLDINGS_DB}/${id}`);
+    const refDeleteHolding = ref(this.database, `${HOLDINGS_DB}/${key}`);
     remove(refDeleteHolding).then();
   }
 
@@ -136,6 +147,18 @@ export class HoldingsService implements OnDestroy {
 
   public orderBySymbol(holdings: Holding[]): Holding[] {
     return holdings.sort((a, b) => a.symbol.toLowerCase().localeCompare(b.symbol.toLowerCase()));
+  }
+
+  /**
+   * to make sure that data is fully loaded from firebase RTDB
+   */
+  public cleanRefresh(): void {
+    const interval = setInterval(() => {
+      if (typeof this.unsubscriber === 'function') {
+        setTimeout(() => this.refresh(), 1000);
+        clearInterval(interval);
+      }
+    }, 100);
   }
 
   private convertDataSnapshotToArray(dataSnapshot: DataSnapshot): Holding[] {

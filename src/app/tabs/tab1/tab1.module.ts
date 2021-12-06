@@ -5,7 +5,7 @@ import {FormsModule} from '@angular/forms';
 import {Tab1Page} from './tab1.page';
 
 import {Tab1PageRoutingModule} from './tab1-routing.module';
-import {HomeComponent} from '../pages/home/home.component';
+import {HomeComponent} from '../../containers/home/home.component';
 
 @NgModule({
   imports: [IonicModule, CommonModule, FormsModule, Tab1PageRoutingModule],

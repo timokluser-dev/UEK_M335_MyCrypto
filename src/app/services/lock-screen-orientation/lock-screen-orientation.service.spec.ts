@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { LockScreenOrientationService } from './lock-screen-orientation.service';
+import {LockScreenOrientationService} from './lock-screen-orientation.service';
 
 describe('LockScreenOrientationService', () => {
   let service: LockScreenOrientationService;

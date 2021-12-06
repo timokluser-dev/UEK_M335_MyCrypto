@@ -6,7 +6,7 @@ import {FormsModule} from '@angular/forms';
 import {Tab2Page} from './tab2.page';
 
 import {Tab2PageRoutingModule} from './tab2-routing.module';
-import {ProfileComponent} from '../pages/profile/profile.component';
+import {ProfileComponent} from '../../containers/profile/profile.component';
 
 @NgModule({
   imports: [IonicModule, CommonModule, FormsModule, Tab2PageRoutingModule],
