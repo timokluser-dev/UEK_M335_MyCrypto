@@ -6,23 +6,44 @@
   </ion-refresher>
 
   <ion-list>
-    <ion-item-sliding *ngFor="let holding of holdings">
-      <ion-item [routerLink]="['/ui/edit', holding._key]">
-        <ion-avatar slot="start">
-          <img [src]="getHoldingImage(holding)" />
-        </ion-avatar>
+    <ng-container *ngIf="dataFullyLoaded">
+      <ion-item-sliding *ngFor="let holding of holdings">
+        <ion-item [routerLink]="['/ui/edit', holding._key]">
+          <ion-avatar slot="start">
+            <img [src]="getHoldingImage(holding)" />
+          </ion-avatar>
+          <ion-label>
+            <h2>{{ holding.symbol }}</h2>
+            <p>{{ formatNumber(holding.amount) }} {{ holding.symbol }}</p>
+            <p>{{ holding.exchange }}</p>
+          </ion-label>
+        </ion-item>
+
+        <ion-item-options side="end" (ionSwipe)="deleteHolding(holding)">
+          <ion-item-option color="danger" expandable (click)="deleteHolding(holding)">
+            <ion-icon slot="icon-only" name="trash"></ion-icon>
+          </ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ng-container>
+
+    <ng-container *ngIf="!holdings.length && !dataFullyLoaded">
+      <ion-item *ngFor="let i of getArrayOfNumbers(3)">
+        <ion-thumbnail slot="start">
+          <ion-skeleton-text></ion-skeleton-text>
+        </ion-thumbnail>
         <ion-label>
-          <h2>{{ holding.symbol }}</h2>
-          <p>{{ formatNumber(holding.amount) }} {{ holding.symbol }}</p>
-          <p>{{ holding.exchange }}</p>
+          <h3>
+            <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+          </h3>
+          <p>
+            <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+          </p>
+          <p>
+            <ion-skeleton-text animated style="width: 30%"></ion-skeleton-text>
+          </p>
         </ion-label>
       </ion-item>
-
-      <ion-item-options side="end" (ionSwipe)="deleteHolding(holding)">
-        <ion-item-option color="danger" expandable (click)="deleteHolding(holding)">
-          <ion-icon slot="icon-only" name="trash"></ion-icon>
-        </ion-item-option>
-      </ion-item-options>
-    </ion-item-sliding>
+    </ng-container>
   </ion-list>
 </ion-content>

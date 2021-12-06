@@ -10,11 +10,12 @@ import {HoldingsService} from '../../services/holdings/holdings.service';
 })
 export class HomeComponent implements OnInit {
   public searchTerm: string = '';
+  public dataFullyLoaded: boolean = false;
 
   constructor(private holdingsService: HoldingsService) {}
 
   ngOnInit() {
-    this.holdingsService.cleanRefresh();
+    this.holdingsService.cleanRefresh(() => (this.dataFullyLoaded = true));
   }
 
   public get holdings(): Holding[] {
@@ -28,7 +29,9 @@ export class HomeComponent implements OnInit {
   }
 
   public refreshHoldings($event): void {
-    this.holdingsService.refresh($event);
+    this.holdingsService.refresh(() => {
+      $event.target.complete();
+    });
   }
 
   public deleteHolding(holding: Holding): void {
@@ -41,5 +44,13 @@ export class HomeComponent implements OnInit {
 
   public getHoldingImage(holding: Holding): string {
     return 'assets/cryptos/fallback.png';
+  }
+
+  public getArrayOfNumbers(to: number, from: number = 0): number[] {
+    const array = [];
+    for (let i = from; i < to; i++) {
+      array.push(i);
+    }
+    return array;
   }
 }

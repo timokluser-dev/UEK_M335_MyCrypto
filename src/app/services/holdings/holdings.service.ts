@@ -96,21 +96,13 @@ export class HoldingsService implements OnDestroy {
     });
   }
 
-  public refresh($event = null): void {
+  public refresh(callback = null): void {
     typeof this.unsubscriber === 'function' && this.unsubscriber();
     this.get();
-    $event?.target?.complete();
+    callback && typeof callback === 'function' && callback();
   }
 
   public getByKey(key: string): Promise<Holding> {
-    // const refDatabase = ref(this.database);
-    // return get(child(refDatabase, `${HOLDINGS_DB}/${key}`)).then(dataSnapshot => {
-    //   let element = dataSnapshot.val() as Holding;
-    //   // manual remapping of key
-    //   element._key = key;
-    //   return element;
-    // });
-
     return new Promise<Holding>((resolve, reject) => {
       const holding = this._holdings.filter(holding => holding._key === key)[0];
       !holding && reject(new Error('no holding with key found'));
@@ -151,11 +143,14 @@ export class HoldingsService implements OnDestroy {
 
   /**
    * to make sure that data is fully loaded from firebase RTDB
+   * @param callback a callback when content is fully loaded
    */
-  public cleanRefresh(): void {
+  public cleanRefresh(callback): void {
     const interval = setInterval(() => {
       if (typeof this.unsubscriber === 'function') {
-        setTimeout(() => this.refresh(), 1000);
+        setTimeout(() => {
+          this.refresh(callback);
+        }, 1000);
         clearInterval(interval);
       }
     }, 100);
