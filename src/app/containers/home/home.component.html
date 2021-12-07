@@ -9,9 +9,6 @@
     <ng-container *ngIf="dataFullyLoaded">
       <ion-item-sliding *ngFor="let holding of holdings">
         <ion-item [routerLink]="['/ui/edit', holding._key]">
-          <ion-avatar slot="start">
-            <img [src]="getHoldingImage(holding)" />
-          </ion-avatar>
           <ion-label>
             <h2>{{ holding.symbol }}</h2>
             <p>{{ formatNumber(holding.amount) }} {{ holding.symbol }}</p>
