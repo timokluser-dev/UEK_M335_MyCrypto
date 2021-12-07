@@ -3,7 +3,7 @@
     <ion-title>My Holdings</ion-title>
     <ion-buttons slot="end" *ngIf="!platformHeaderIsSupported">
       <ion-button [routerLink]="['/ui/new']" color="primary">
-        <ion-icon name="add"></ion-icon>
+        <ion-icon name="add" class="tab1__icon"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -15,7 +15,7 @@
       <ion-title size="large">My Holdings</ion-title>
       <ion-buttons slot="end">
         <ion-button [routerLink]="['/ui/new']">
-          <ion-icon name="add"></ion-icon>
+          <ion-icon slot="icon-only" name="add" class="tab1__icon"></ion-icon>
         </ion-button>
       </ion-buttons>
     </ion-toolbar>
