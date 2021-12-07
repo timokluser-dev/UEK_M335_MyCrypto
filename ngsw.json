@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1638871294283,
+  "timestamp": 1638873612291,
   "index": "https://timokluser-dev.github.io/UEK_M335_MyCrypto/index.html",
   "assetGroups": [
     {
@@ -32,7 +32,7 @@
         "https://timokluser-dev.github.io/UEK_M335_MyCrypto/4195.efd0ecf19fc8fc1e601e.js",
         "https://timokluser-dev.github.io/UEK_M335_MyCrypto/431.b03d6f019dcf9c38905d.js",
         "https://timokluser-dev.github.io/UEK_M335_MyCrypto/4513.6485b379db23d07c0be3.js",
-        "https://timokluser-dev.github.io/UEK_M335_MyCrypto/4640.b74e048dfd8ad5e05b9d.js",
+        "https://timokluser-dev.github.io/UEK_M335_MyCrypto/4640.c8ee67893e7dc7a7d950.js",
         "https://timokluser-dev.github.io/UEK_M335_MyCrypto/4694.409b13e20c5e56ca4f95.js",
         "https://timokluser-dev.github.io/UEK_M335_MyCrypto/5043.b308fdc8944a34c35d3e.js",
         "https://timokluser-dev.github.io/UEK_M335_MyCrypto/5174.54f59b22d80288f6425b.js",
@@ -60,7 +60,7 @@
         "https://timokluser-dev.github.io/UEK_M335_MyCrypto/7896.63ff8ab3a10027ab011f.js",
         "https://timokluser-dev.github.io/UEK_M335_MyCrypto/801.19731df3cb3d76fdc320.js",
         "https://timokluser-dev.github.io/UEK_M335_MyCrypto/8056.b551c7508c600dac2d24.js",
-        "https://timokluser-dev.github.io/UEK_M335_MyCrypto/8493.8a44090e2fe8bb7626c0.js",
+        "https://timokluser-dev.github.io/UEK_M335_MyCrypto/8493.5eda7c5353984b6fbe8b.js",
         "https://timokluser-dev.github.io/UEK_M335_MyCrypto/862.a159758b02e78adc91f9.js",
         "https://timokluser-dev.github.io/UEK_M335_MyCrypto/8695.ff2fcec9bd106293f61e.js",
         "https://timokluser-dev.github.io/UEK_M335_MyCrypto/8708.e3cc7b1ba29aa5746cc2.js",
@@ -77,7 +77,7 @@
         "https://timokluser-dev.github.io/UEK_M335_MyCrypto/polyfills-css-shim.277755a08d22562385cd.js",
         "https://timokluser-dev.github.io/UEK_M335_MyCrypto/polyfills-dom.2c4e77ac920e6bd841d8.js",
         "https://timokluser-dev.github.io/UEK_M335_MyCrypto/polyfills.dbd39054e7047e846580.js",
-        "https://timokluser-dev.github.io/UEK_M335_MyCrypto/runtime.d96465c8998ac9ec743a.js",
+        "https://timokluser-dev.github.io/UEK_M335_MyCrypto/runtime.ac70cdd5524431fd1726.js",
         "https://timokluser-dev.github.io/UEK_M335_MyCrypto/styles.6c89cd92a6f48c459c06.css"
       ],
       "patterns": []
@@ -128,7 +128,7 @@
     "https://timokluser-dev.github.io/UEK_M335_MyCrypto/4195.efd0ecf19fc8fc1e601e.js": "e45be9075e64434617d650d95ae2d9a3103d4bec",
     "https://timokluser-dev.github.io/UEK_M335_MyCrypto/431.b03d6f019dcf9c38905d.js": "a0c96ed3dc36b0debd7bac6dd7315bc8dca1619c",
     "https://timokluser-dev.github.io/UEK_M335_MyCrypto/4513.6485b379db23d07c0be3.js": "96c2b750c7a1681b712a89eee5b66ccae2c7a841",
-    "https://timokluser-dev.github.io/UEK_M335_MyCrypto/4640.b74e048dfd8ad5e05b9d.js": "2ba1014ccbf83a195adcf55d143e610597f0d9b8",
+    "https://timokluser-dev.github.io/UEK_M335_MyCrypto/4640.c8ee67893e7dc7a7d950.js": "527487f85148bb553b9c6512dc4474dfb9abe6b8",
     "https://timokluser-dev.github.io/UEK_M335_MyCrypto/4694.409b13e20c5e56ca4f95.js": "88bc7a5fb19f5509673d56d8d99150f40685c1af",
     "https://timokluser-dev.github.io/UEK_M335_MyCrypto/5043.b308fdc8944a34c35d3e.js": "b5d98662bea17b32ca4704a5f2f7835d23eedb60",
     "https://timokluser-dev.github.io/UEK_M335_MyCrypto/5174.54f59b22d80288f6425b.js": "2b037ba50f0e054c30397d9629512ccbecd97dcf",
@@ -156,7 +156,7 @@
     "https://timokluser-dev.github.io/UEK_M335_MyCrypto/7896.63ff8ab3a10027ab011f.js": "a95de423c31267447a2377b35f2f557752c95659",
     "https://timokluser-dev.github.io/UEK_M335_MyCrypto/801.19731df3cb3d76fdc320.js": "b2478fa9c3cc34e73fc779abd5be6137eb7c566c",
     "https://timokluser-dev.github.io/UEK_M335_MyCrypto/8056.b551c7508c600dac2d24.js": "7377d06326386d099514f6a1f51d807d3a068493",
-    "https://timokluser-dev.github.io/UEK_M335_MyCrypto/8493.8a44090e2fe8bb7626c0.js": "b44038e55e393fb9b2042acbea540bdbc8a44bb6",
+    "https://timokluser-dev.github.io/UEK_M335_MyCrypto/8493.5eda7c5353984b6fbe8b.js": "11af9b0cb308d341b82c13b015367ee53d16c2f9",
     "https://timokluser-dev.github.io/UEK_M335_MyCrypto/862.a159758b02e78adc91f9.js": "b75da879f04d472fa37c26cb834882f9f1caf088",
     "https://timokluser-dev.github.io/UEK_M335_MyCrypto/8695.ff2fcec9bd106293f61e.js": "f70f1f7bf6560057ee9521a4c4df6016ed970be0",
     "https://timokluser-dev.github.io/UEK_M335_MyCrypto/8708.e3cc7b1ba29aa5746cc2.js": "0d7095288a4499f38cfefe76dbb819e44935ce27",
@@ -177,14 +177,14 @@
     "https://timokluser-dev.github.io/UEK_M335_MyCrypto/assets/icons/icon-96x96.png": "4894e661844ff22487e1e060aa48e9e39b59b008",
     "https://timokluser-dev.github.io/UEK_M335_MyCrypto/assets/shapes.svg": "5413e95adabcb2cb639970051f55e0ddb64ace53",
     "https://timokluser-dev.github.io/UEK_M335_MyCrypto/common.474549d7b2d2aa805efc.js": "012bdafc657d38437ea3a8e4f5fe50dec40a10e1",
-    "https://timokluser-dev.github.io/UEK_M335_MyCrypto/index.html": "10cac32cc2b9c7d77fbff5180263a6b78e6b6e74",
+    "https://timokluser-dev.github.io/UEK_M335_MyCrypto/index.html": "9fe617f61d749b0690381fc6cce7f47c4c05d8b3",
     "https://timokluser-dev.github.io/UEK_M335_MyCrypto/main.10b34ea26c6f8008d896.js": "da7375ea1529c27b494b51b46a38c85891ba8517",
     "https://timokluser-dev.github.io/UEK_M335_MyCrypto/manifest.webmanifest": "9660333ffeff33391e528448345965d2b5cee4b0",
     "https://timokluser-dev.github.io/UEK_M335_MyCrypto/polyfills-core-js.1072cf89e83b0891c8a5.js": "0230301234d50af9ee078ed198cfe78f2c963581",
     "https://timokluser-dev.github.io/UEK_M335_MyCrypto/polyfills-css-shim.277755a08d22562385cd.js": "9b7a6908c37bc64ce445ce0b93bb86cfac181704",
     "https://timokluser-dev.github.io/UEK_M335_MyCrypto/polyfills-dom.2c4e77ac920e6bd841d8.js": "d85d6d21a5c672054aa95acee78d72258c593ea4",
     "https://timokluser-dev.github.io/UEK_M335_MyCrypto/polyfills.dbd39054e7047e846580.js": "6dc63b4679e5aca0243c6a7cce5a6ab357870cb6",
-    "https://timokluser-dev.github.io/UEK_M335_MyCrypto/runtime.d96465c8998ac9ec743a.js": "6d64d8277b61f947d40a6bfa9d4ba5022065dcee",
+    "https://timokluser-dev.github.io/UEK_M335_MyCrypto/runtime.ac70cdd5524431fd1726.js": "d0d3d72d41c498867182aeef654172aff4c410d1",
     "https://timokluser-dev.github.io/UEK_M335_MyCrypto/styles.6c89cd92a6f48c459c06.css": "3b61be50cf395dda705e0f8c6b909d5a3ebb15a0"
   },
   "navigationUrls": [
