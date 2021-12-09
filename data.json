@@ -1,0 +1,28 @@
+{
+  "holdings": [
+    {
+      "amount": 10,
+      "exchange": "Binance",
+      "owner": "e407efa5-8633-4024-b36f-ad497aa4a932",
+      "symbol": "BTC"
+    },
+    {
+      "amount": 50,
+      "exchange": "Bitpanda",
+      "owner": "e407efa5-8633-4024-b36f-ad497aa4a932",
+      "symbol": "ETH"
+    },
+    {
+      "amount": 1000,
+      "exchange": "FTX",
+      "owner": "e407efa5-8633-4024-b36f-ad497aa4a932",
+      "symbol": "USDT"
+    },
+    {
+      "amount": 50,
+      "exchange": "Binance",
+      "owner": "e407efa5-8633-4024-b36f-ad497aa4a932",
+      "symbol": "BNB"
+    }
+  ]
+}
