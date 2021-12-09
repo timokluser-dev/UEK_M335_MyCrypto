@@ -22,7 +22,7 @@ npm run --list
 
 ## Starting
 
-For Development use: 
+For Development use:
 
 ```bash
 npm install
