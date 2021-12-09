@@ -5,7 +5,7 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <ion-list>
+  <ion-list class="home__list">
     <ng-container *ngIf="dataFullyLoaded">
       <ion-item-sliding *ngFor="let holding of holdings">
         <ion-item [routerLink]="['/ui/edit', holding._key]">
