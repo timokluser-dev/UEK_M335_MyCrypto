@@ -20,6 +20,15 @@ npm install
 npm run --list
 ```
 
+## Starting
+
+For Development use: 
+
+```bash
+npm install
+npm run start:lab
+```
+
 ## Contributing
 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would
