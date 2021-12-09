@@ -49,11 +49,7 @@ export class HoldingsService implements OnDestroy {
   // unsubscriber of get data event
   private unsubscriber: Unsubscribe;
 
-  constructor(
-    private deviceAuthService: DeviceAuthService,
-    private isOnlineService: IsOnlineService,
-    private router: Router
-  ) {
+  constructor(private deviceAuthService: DeviceAuthService) {
     this._holdings = [];
     this.firebaseApp = initializeApp(environment.firebase);
     this.auth = getAuth(this.firebaseApp);
@@ -76,7 +72,7 @@ export class HoldingsService implements OnDestroy {
    * to cleanly unsubscribe to data updates when service destroyed
    */
   ngOnDestroy() {
-    this.unsubscriber();
+    this.unsubscribe();
   }
 
   public get holdings(): Holding[] {
@@ -97,7 +93,7 @@ export class HoldingsService implements OnDestroy {
   }
 
   public refresh(callback = null): void {
-    typeof this.unsubscriber === 'function' && this.unsubscriber();
+    this.unsubscribe();
     this.get();
     callback && typeof callback === 'function' && callback();
   }
@@ -112,8 +108,15 @@ export class HoldingsService implements OnDestroy {
 
   public create(holding: Holding): void {
     // path to new item
+    // https://stackoverflow.com/questions/33682329/how-deal-with-firebase-offline-mode-and-data-push
     let refNewHolding = push(this.refHoldings);
     this.setOwnerToMe(holding).then(() => {
+      // manually map key to object for local cache
+      holding._key = refNewHolding.key;
+      // manually add holding to local cache if offline
+      this._holdings.push({...holding});
+
+      // delete key and add to create
       delete holding._key;
       set(refNewHolding, holding).then();
     });
@@ -154,6 +157,13 @@ export class HoldingsService implements OnDestroy {
         clearInterval(interval);
       }
     }, 100);
+  }
+
+  /**
+   * unsubscribe the data event
+   */
+  public unsubscribe(): void {
+    typeof this.unsubscriber === 'function' && this.unsubscriber();
   }
 
   private convertDataSnapshotToArray(dataSnapshot: DataSnapshot): Holding[] {

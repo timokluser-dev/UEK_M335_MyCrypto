@@ -15,12 +15,13 @@ export class AppComponent implements OnInit, OnDestroy {
     private lockScreenOrientationService: LockScreenOrientationService
   ) {}
 
-  ngOnDestroy(): void {
-    this.isOnlineService.unregister();
-  }
-
   ngOnInit(): void {
     this.isOnlineService.register();
     this.lockScreenOrientationService.lock();
+  }
+
+  ngOnDestroy(): void {
+    this.isOnlineService.unregister();
+    this.holdingsService.unsubscribe();
   }
 }
