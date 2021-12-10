@@ -24,7 +24,7 @@
       </ion-item-sliding>
     </ng-container>
 
-    <ng-container *ngIf="!holdings.length && !dataFullyLoaded">
+    <ng-container *ngIf="!dataFullyLoaded">
       <ion-item *ngFor="let i of getArrayOfNumbers(3)">
         <ion-thumbnail slot="start">
           <ion-skeleton-text></ion-skeleton-text>
